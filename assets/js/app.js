@@ -10,12 +10,12 @@ const PORTFOLIO_DATA = {
   profile: {
     fullName: "Mukhlis Farhan",
     title: "Founder & Managing Director",
-    company: "Farhan Gold & Mining Trading Group",
-    phoneDisplay: "+233 24 000 0000",
-    phoneDial: "+233240000000",
-    whatsappNumber: "233240000000", // Digits only with country code
+    company: "Farhan Gold, Mining & Livestock Group",
+    phoneDisplay: "+233 55 400 1608",
+    phoneDial: "+233554001608",
+    whatsappNumber: "233554001608", // Digits only with country code
     email: "mukhlis@mukhlisfarhantrading.com",
-    location: "Accra, Ghana"
+    location: "Odumase-Konongo, Ghana"
   },
 
   // Exact Qwik-Gold Calculator Defaults (GHS)
@@ -26,31 +26,43 @@ const PORTFOLIO_DATA = {
     defaultPricePerBladeGhs: 1100
   },
 
-  // Horizontal Swipeable Operations Reel (Gold Trading & Mining Equipment)
-  highlights: [
+  // Real Mining Materials, Machines & Spare Parts In Stock at His Shop
+  shopProducts: [
     {
-      tag: "QWIK-GOLD",
-      title: "Refined 24K & 22K Bullion",
-      subtitle: "Verified weight, water-density assay & instant GHS payout",
-      img: "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=720&q=80"
+      tag: "DIESEL ENGINE",
+      title: "Changfa Diesel Engine",
+      subtitle: "Heavy-duty single-cylinder engine for crushers & wash pumps",
+      img: "assets/img/products/changfa-diesel-engine.jpg"
     },
     {
-      tag: "MACHINE MVP",
-      title: "Heavy Mining Machinery",
-      subtitle: "Crushers, excavators & turnkey wash plants",
-      img: "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=720&q=80"
+      tag: "GOLD RECOVERY",
+      title: "DreamTurf Gold Carpet",
+      subtitle: "98% fine-gold recovery sluice box mat — full rolls in stock",
+      img: "assets/img/products/gold-mining-carpet.jpg"
     },
     {
-      tag: "QWIK-GOLD",
-      title: "Precision Assay & Smelting",
-      subtitle: "Transparent digital ledgers for every trade",
-      img: "https://images.unsplash.com/photo-1624365168968-f283d506c6b6?auto=format&fit=crop&w=720&q=80"
+      tag: "SLURRY PUMP",
+      title: "Vertical Sand & Gravel Pumps",
+      subtitle: "High-head vertical sand suction pumps with pulley drive",
+      img: "assets/img/products/vertical-sand-pumps.jpg"
     },
     {
-      tag: "MACHINE MVP",
-      title: "Ore Processing & Site Tools",
-      subtitle: "Pumps, concentrators, detectors & spares",
-      img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=720&q=80"
+      tag: "HOSE & PIPING",
+      title: "Heavy Suction & Slurry Hoses",
+      subtitle: "Reinforced rubber mining hoses with heavy-duty orange cuffs",
+      img: "assets/img/products/suction-hoses.jpg"
+    },
+    {
+      tag: "PUMP PARTS",
+      title: "Cast-Iron Pump Volutes",
+      subtitle: "Wear-resistant replacement pump shells & complete assemblies",
+      img: "assets/img/products/pump-casings.jpg"
+    },
+    {
+      tag: "FITTINGS",
+      title: "Steel Flange Hose Adapters",
+      subtitle: "Heavy-gauge bolt-on flange couplings & reducers in bulk",
+      img: "assets/img/products/flange-adapters.jpg"
     }
   ]
 };
@@ -177,7 +189,7 @@ let activeDiscount = PORTFOLIO_DATA.qwikGoldSettings.purityDiscountPercent;
 
 document.addEventListener("DOMContentLoaded", () => {
   bindProfileEndpoints();
-  renderHighlightsReel();
+  renderShopProducts();
   initEstimator();
   syncQwikGoldSettings();
 });
@@ -233,61 +245,75 @@ function bindProfileEndpoints() {
 }
 
 /**
- * 2. Switches between the Qwik-Gold & Machine MVP Venture Spotlight views
+ * 2. Switches between Qwik-Gold, Machine MVP & Cattle Farm Venture Spotlights
  */
 function selectVenture(division) {
-  const tabGold = document.getElementById("vtab-gold");
-  const tabMining = document.getElementById("vtab-mining");
-  const panelGold = document.getElementById("venture-panel-gold");
-  const panelMining = document.getElementById("venture-panel-mining");
+  const divisions = ["gold", "mining", "cattle"];
 
-  if (division === "gold") {
-    tabGold.classList.add("active");
-    tabGold.setAttribute("aria-selected", "true");
-    tabMining.classList.remove("active");
-    tabMining.setAttribute("aria-selected", "false");
-    panelGold.classList.remove("hidden");
-    panelMining.classList.add("hidden");
-  } else {
-    tabMining.classList.add("active");
-    tabMining.setAttribute("aria-selected", "true");
-    tabGold.classList.remove("active");
-    tabGold.setAttribute("aria-selected", "false");
-    panelMining.classList.remove("hidden");
-    panelGold.classList.add("hidden");
-  }
+  divisions.forEach(key => {
+    const tab = document.getElementById(`vtab-${key}`);
+    const panel = document.getElementById(`venture-panel-${key}`);
+    const isActive = key === division;
+
+    if (tab) {
+      tab.classList.toggle("active", isActive);
+      tab.setAttribute("aria-selected", isActive ? "true" : "false");
+    }
+    if (panel) {
+      panel.classList.toggle("hidden", !isActive);
+    }
+  });
 }
 
 /**
- * 3. Renders the horizontal swipeable Operations Reel
+ * 3. Renders the 2-Column In-Stock Mining Shop Products Grid
  */
-function renderHighlightsReel() {
-  const container = document.getElementById("highlights-reel");
+function renderShopProducts() {
+  const container = document.getElementById("shop-products-grid");
   if (!container) return;
 
-  container.innerHTML = PORTFOLIO_DATA.highlights.map((item, index) => `
-    <div class="reel-card" onclick="openPhotoPreview(${index})">
-      <img src="${item.img}" alt="${item.title}" loading="lazy" class="reel-img" />
-      <div class="p-3.5">
-        <span class="eyebrow !text-[9.5px]">${item.tag}</span>
-        <h3 class="text-[14px] font-bold text-[#141917] mt-1 leading-snug">${item.title}</h3>
-        <p class="text-[11.5px] text-[#525B56] mt-1 leading-relaxed">${item.subtitle}</p>
+  container.innerHTML = PORTFOLIO_DATA.shopProducts.map((item, index) => `
+    <div class="shop-item-card" onclick="openProductPreview(${index})">
+      <div class="relative overflow-hidden bg-[#F3EFE6]">
+        <img src="${item.img}" alt="${item.title}" loading="lazy" class="shop-item-img" />
+        <span class="absolute top-2 left-2 text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#141917]/80 text-[#FAF8F4] backdrop-blur-sm">
+          ${item.tag}
+        </span>
+      </div>
+      <div class="p-3 flex-1 flex flex-col justify-between">
+        <div>
+          <h3 class="text-[13px] font-bold text-[#141917] leading-snug">${item.title}</h3>
+          <p class="text-[11px] text-[#525B56] mt-1 leading-relaxed line-clamp-2">${item.subtitle}</p>
+        </div>
+        <div class="mt-2.5 pt-2 border-t border-[#141917]/8 flex items-center justify-between text-[11px] font-bold text-[#B4832C]">
+          <span>In Stock</span>
+          <span>Ask Price →</span>
+        </div>
       </div>
     </div>
   `).join("");
 }
 
-function openPhotoPreview(index) {
-  const item = PORTFOLIO_DATA.highlights[index];
+function openProductPreview(index) {
+  const item = PORTFOLIO_DATA.shopProducts[index];
   if (!item) return;
 
   const img = document.getElementById("photo-sheet-img");
   const tag = document.getElementById("photo-sheet-tag");
   const title = document.getElementById("photo-sheet-title");
+  const desc = document.getElementById("photo-sheet-desc");
+  const inquireBtn = document.getElementById("photo-sheet-inquire-btn");
 
   if (img) img.src = item.img;
   if (tag) tag.textContent = item.tag;
   if (title) title.textContent = item.title;
+  if (desc) desc.textContent = item.subtitle;
+  if (inquireBtn) {
+    inquireBtn.onclick = () => {
+      closeSheet("photo-sheet");
+      openWhatsAppWithContext(`Shop Equipment Inquiry: ${item.title}`);
+    };
+  }
 
   openSheet("photo-sheet");
 }
@@ -425,7 +451,7 @@ function downloadVCard() {
     `EMAIL;TYPE=WORK,INTERNET:${profile.email}`,
     `ADR;TYPE=WORK:;;${profile.location};;;;`,
     `URL:${window.location.href}`,
-    "NOTE:Gold Buying & Selling (Qwik-Gold) and Mining Materials, Tools & Machinery (Machine MVP).",
+    "NOTE:Gold Buying & Selling (Qwik-Gold), Mining Materials & Machinery (Machine MVP), and Commercial Cattle Farming.",
     "END:VCARD"
   ].join("\r\n");
 
@@ -509,7 +535,7 @@ async function shareCard() {
         url: window.location.href
       });
       return;
-    } catch (e) {}
+    } catch (e) { }
   }
 
   try {
