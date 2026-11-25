@@ -1,0 +1,587 @@
+/* ==========================================================================
+   MUKHLIS FARHAN — ORIGINAL EDITORIAL LUXURY DIGITAL PORTFOLIO
+   Bright Warm Alabaster, Burnished Champagne Gold & Deep Forest-Slate Ink
+   Mobile-First Portrait Canvas (430px centered on desktop, full-bleed mobile)
+   ========================================================================== */
+
+:root {
+  --canvas-outer: #EAE7E0;
+  --surface-paper: #FAF8F4;
+  --surface-pure: #FFFFFF;
+  --surface-tint: #F3EFE6;
+  --surface-ink: #141917;
+
+  --ink-primary: #141917;
+  --ink-secondary: #525B56;
+  --ink-muted: #848E88;
+
+  --gold-bright: #D6A74F;
+  --gold-rich: #B4832C;
+  --gold-deep: #8C6119;
+  --gold-soft: #FBF4E4;
+  --gold-border: rgba(180, 131, 44, 0.22);
+
+  --emerald: #0E7C5B;
+  --emerald-bg: #E7F5F0;
+
+  --hairline: rgba(20, 25, 23, 0.08);
+  --shadow-shell: 0 32px 80px -24px rgba(20, 25, 23, 0.16), 0 4px 20px -4px rgba(20, 25, 23, 0.06);
+  --shadow-card: 0 10px 30px -12px rgba(20, 25, 23, 0.07);
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--canvas-outer);
+  color: var(--ink-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  /* Subtle warm architectural grain on desktop outer canvas */
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(214, 167, 79, 0.14) 0%, transparent 45%),
+    radial-gradient(circle at 88% 82%, rgba(14, 124, 91, 0.07) 0%, transparent 45%);
+}
+
+/* ==========================================================================
+   PORTRAIT MOBILE CANVAS (Always opens like a sleek mobile screen)
+   ========================================================================== */
+
+.stage-wrap {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0;
+}
+
+.mobile-canvas {
+  width: 100%;
+  max-width: 440px;
+  min-height: 100vh;
+  background-color: var(--surface-paper);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 520px) {
+  .stage-wrap {
+    padding: 36px 20px 56px;
+  }
+
+  .mobile-canvas {
+    min-height: auto;
+    border-radius: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: var(--shadow-shell);
+    overflow: hidden;
+  }
+}
+
+/* ==========================================================================
+   TYPOGRAPHY HELPERS
+   ========================================================================== */
+
+.font-editorial {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+
+.font-mono-num {
+  font-family: var(--font-mono);
+}
+
+.eyebrow {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-rich);
+}
+
+/* ==========================================================================
+   TOP BAR & LIVE SPOT RIBBON
+   ========================================================================== */
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 12px;
+}
+
+.brand-monogram-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-primary);
+}
+
+.brand-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold-rich);
+}
+
+.icon-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 13px;
+  border-radius: 999px;
+  background: var(--surface-pure);
+  border: 1px solid var(--hairline);
+  color: var(--ink-primary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(20, 25, 23, 0.04);
+  transition: all 0.2s ease;
+}
+
+.icon-pill-btn:hover {
+  border-color: var(--gold-rich);
+  color: var(--gold-deep);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   BESPOKE EDITORIAL HERO (No boxed dark header — clean bright magazine feel)
+   ========================================================================== */
+
+.hero-section {
+  padding: 12px 24px 28px;
+}
+
+.portrait-frame {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  border-radius: 26px;
+  background: linear-gradient(145deg, #FBF4E4 0%, #EBD39D 100%);
+  border: 2px solid var(--surface-pure);
+  box-shadow: 0 12px 28px -8px rgba(180, 131, 44, 0.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.portrait-initials {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--gold-deep);
+  letter-spacing: -0.02em;
+}
+
+.verified-dot {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--emerald);
+  color: #FFFFFF;
+  border: 3px solid var(--surface-paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.live-spot-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 16px;
+  border-radius: 16px;
+  background: var(--surface-pure);
+  border: 1px solid var(--gold-border);
+  margin-top: 22px;
+  box-shadow: var(--shadow-card);
+}
+
+.live-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 0 4px rgba(14, 124, 91, 0.16);
+  animation: softPulse 2.4s infinite;
+}
+
+@keyframes softPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.85); opacity: 0.6; }
+}
+
+/* Primary Action Row (Save Contact + Quick Message) */
+.btn-ink-primary {
+  background: var(--surface-ink);
+  color: #FAF8F4;
+  border: none;
+  border-radius: 16px;
+  padding: 14px 18px;
+  font-size: 13.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 12px 24px -10px rgba(20, 25, 23, 0.38);
+}
+
+.btn-ink-primary:hover {
+  background: #232C28;
+  transform: translateY(-2px);
+}
+
+.btn-gold-outline {
+  background: var(--surface-pure);
+  color: var(--ink-primary);
+  border: 1px solid rgba(20, 25, 23, 0.14);
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-size: 13.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-gold-outline:hover {
+  border-color: var(--gold-rich);
+  background: var(--gold-soft);
+  color: var(--gold-deep);
+  transform: translateY(-2px);
+}
+
+/* Horizontal Quick Contact Strip */
+.contact-pills-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.contact-chip {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 8px;
+  border-radius: 14px;
+  background: var(--surface-tint);
+  color: var(--ink-primary);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.contact-chip:hover {
+  background: var(--surface-pure);
+  border-color: var(--gold-border);
+  color: var(--gold-deep);
+}
+
+/* ==========================================================================
+   SECTION DIVIDER & SPACIOUS EDITORIAL SECTIONS
+   ========================================================================== */
+
+.section-block {
+  padding: 28px 24px;
+  border-top: 1px solid var(--hairline);
+}
+
+/* ==========================================================================
+   BESPOKE DUAL-VENTURE SHOWCASE (QWIK-GOLD & MACHINE MVP)
+   ========================================================================== */
+
+.venture-switcher {
+  display: flex;
+  padding: 5px;
+  background: var(--surface-tint);
+  border-radius: 18px;
+  gap: 6px;
+  margin-top: 16px;
+  margin-bottom: 20px;
+}
+
+.venture-tab {
+  flex: 1;
+  padding: 11px 12px;
+  border-radius: 14px;
+  border: none;
+  background: transparent;
+  color: var(--ink-secondary);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.venture-tab.active {
+  background: var(--surface-pure);
+  color: var(--ink-primary);
+  box-shadow: 0 6px 16px -6px rgba(20, 25, 23, 0.14);
+}
+
+/* Spotlight Venture Card */
+.venture-spotlight {
+  background: var(--surface-pure);
+  border-radius: 26px;
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.venture-visual-banner {
+  position: relative;
+  height: 158px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px 20px;
+}
+
+.venture-visual-banner.gold-theme {
+  background: linear-gradient(135deg, #2A2111 0%, #6D4E16 55%, #C89738 100%);
+}
+
+.venture-visual-banner.mining-theme {
+  background: linear-gradient(135deg, #16221E 0%, #244037 55%, #4A6E5D 100%);
+}
+
+.venture-visual-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.14;
+  background-image: radial-gradient(#FFFFFF 1px, transparent 1px);
+  background-size: 16px 16px;
+  pointer-events: none;
+}
+
+/* Spec List inside Venture Card */
+.spec-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.spec-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.spec-bullet {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: var(--gold-soft);
+  color: var(--gold-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ==========================================================================
+   INTERACTIVE GOLD DESK ESTIMATOR (AIRY LIGHT CARD)
+   ========================================================================== */
+
+.estimator-card {
+  background: var(--surface-pure);
+  border-radius: 24px;
+  border: 1px solid var(--gold-border);
+  padding: 22px 20px;
+  box-shadow: var(--shadow-card);
+}
+
+.purity-pills {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.purity-pill {
+  padding: 9px 6px;
+  border-radius: 12px;
+  border: 1px solid var(--hairline);
+  background: var(--surface-paper);
+  color: var(--ink-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.purity-pill.active {
+  background: var(--gold-soft);
+  border-color: var(--gold-rich);
+  color: var(--gold-deep);
+}
+
+.weight-input-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface-paper);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin-top: 8px;
+  transition: border-color 0.2s ease;
+}
+
+.weight-input-box:focus-within {
+  border-color: var(--gold-rich);
+  background: var(--surface-pure);
+}
+
+.weight-input-box input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink-primary);
+  outline: none;
+}
+
+/* ==========================================================================
+   HORIZONTAL SCROLLABLE VISUAL HIGHLIGHTS (SWIPEABLE ON MOBILE)
+   ========================================================================== */
+
+.reel-scroller {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 6px;
+  margin: 0 -24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  scrollbar-width: none;
+}
+
+.reel-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.reel-card {
+  flex: 0 0 228px;
+  scroll-snap-align: start;
+  background: var(--surface-pure);
+  border-radius: 20px;
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reel-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+}
+
+.reel-img {
+  width: 100%;
+  height: 138px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==========================================================================
+   BOTTOM SHEET MODALS (QR PASS & DIRECT DEAL DRAWER)
+   ========================================================================== */
+
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 25, 23, 0.48);
+  backdrop-filter: blur(6px);
+  z-index: 60;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 16px;
+}
+
+.sheet-backdrop.open {
+  display: flex;
+  animation: fadeIn 0.2s ease;
+}
+
+.sheet-panel {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface-pure);
+  border-radius: 28px;
+  padding: 24px 22px 26px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.24);
+  animation: slideUpSheet 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUpSheet {
+  from { transform: translateY(36px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Staggered soft reveal */
+.reveal {
+  animation: softReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes softReveal {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
