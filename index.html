@@ -125,14 +125,14 @@
           </a>
         </div>
 
-        <!-- Subtle Live Bullion Market Strip -->
+        <!-- Subtle Live Bullion Market Strip (GHS Goldbod Benchmark) -->
         <div class="live-spot-strip">
           <div class="flex items-center gap-2.5">
             <span class="live-pulse"></span>
-            <span class="text-xs font-semibold text-[#525B56]">Gold Spot (XAU/USD)</span>
+            <span class="text-xs font-semibold text-[#525B56]">Goldbod Benchmark (23K / Pound)</span>
           </div>
           <div class="flex items-center gap-2">
-            <span id="hero-spot-price" class="font-mono-num text-[13px] font-bold text-[#141917]">$2,684.50</span>
+            <span id="hero-spot-price" class="font-mono-num text-[13px] font-bold text-[#141917]">GHS 12,500</span>
             <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-[#E7F5F0] text-[#0E7C5B]">Active Desk</span>
           </div>
         </div>
@@ -291,51 +291,131 @@
         </article>
       </section>
 
-      <!-- 4. INTERACTIVE GOLD ESTIMATOR (CLEAN & BREATHABLE) -->
+      <!-- 4. INTERACTIVE GOLD ESTIMATOR (EXACT QWIK-GOLD GHS FORMULAE) -->
       <section class="section-block reveal" style="animation-delay: 0.24s;">
         <div class="flex items-end justify-between mb-4">
           <div>
-            <p class="eyebrow">Qwik-Gold Quick Tool</p>
+            <p class="eyebrow">Qwik-Gold Formula (GHS)</p>
             <h2 class="font-editorial text-[23px] font-semibold text-[#141917] mt-1">
               Instant Gold Estimator
             </h2>
           </div>
-          <span id="calc-gram-badge" class="font-mono-num text-xs font-semibold text-[#8C6119] bg-[#FBF4E4] px-2.5 py-1 rounded-lg">
-            $86.31 / g
+          <span id="calc-formula-badge" class="font-mono-num text-[11px] font-semibold text-[#8C6119] bg-[#FBF4E4] px-2.5 py-1 rounded-lg">
+            Mayrocy • 0.70%
           </span>
         </div>
 
         <div class="estimator-card">
-          <div>
-            <label for="gold-grams-input" class="text-xs font-bold text-[#525B56]">Enter Weight</label>
-            <div class="weight-input-box">
-              <input id="gold-grams-input" type="number" min="1" step="1" value="100" aria-label="Gold weight in grams" />
-              <span class="text-xs font-bold uppercase tracking-wider text-[#848E88]">Grams</span>
-            </div>
+          <!-- Mode Toggle: Refined Gold (Water Density) vs Gold Balls (Blades) -->
+          <div class="venture-switcher !mt-0 !mb-4">
+            <button type="button" id="est-mode-refined" onclick="setEstimatorMode('refined')" class="venture-tab active !py-2 !text-xs">
+              Refined Gold
+            </button>
+            <button type="button" id="est-mode-balls" onclick="setEstimatorMode('balls')" class="venture-tab !py-2 !text-xs">
+              Gold Balls (Blades)
+            </button>
           </div>
 
-          <div class="mt-4">
-            <span class="text-xs font-bold text-[#525B56]">Select Karat Purity</span>
-            <div class="purity-pills" id="purity-pills">
-              <button type="button" data-purity="24K" class="purity-pill">24K</button>
-              <button type="button" data-purity="23K" class="purity-pill">23K</button>
-              <button type="button" data-purity="22K" class="purity-pill active">22K</button>
-              <button type="button" data-purity="18K" class="purity-pill">18K</button>
+          <!-- REFINED GOLD INPUTS (Top Weight, Down Weight, Goldbod Price GHS) -->
+          <div id="est-inputs-refined" class="space-y-3">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label for="est-top-weight" class="text-[11.5px] font-bold text-[#525B56]">Top Weight</label>
+                <div class="weight-input-box !mt-1 !py-2 !px-3">
+                  <input id="est-top-weight" type="number" step="any" min="0" value="31.00" aria-label="Top weight in grams" class="!text-[16px]" />
+                  <span class="text-[10.5px] font-bold text-[#848E88]">g</span>
+                </div>
+              </div>
+              <div>
+                <label for="est-down-weight" class="text-[11.5px] font-bold text-[#525B56]">Down Weight</label>
+                <div class="weight-input-box !mt-1 !py-2 !px-3">
+                  <input id="est-down-weight" type="number" step="any" min="0" value="1.68" aria-label="Down weight in grams" class="!text-[16px]" />
+                  <span class="text-[10.5px] font-bold text-[#848E88]">g</span>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="mt-5 pt-4 border-t border-[#141917]/10 flex items-center justify-between">
             <div>
-              <div class="text-[11px] font-semibold uppercase tracking-wider text-[#848E88]">Estimated Benchmark</div>
-              <div id="calc-selected-rate" class="font-mono-num text-xs text-[#525B56] mt-0.5">22K (91.6%) • $79.06/g</div>
+              <label for="est-goldbod-price" class="text-[11.5px] font-bold text-[#525B56]">Goldbod Price (per Pound)</label>
+              <div class="weight-input-box !mt-1 !py-2 !px-3">
+                <span class="text-xs font-bold text-[#8C6119] mr-2">GHS</span>
+                <input id="est-goldbod-price" type="number" step="any" min="0" value="12500" aria-label="Goldbod price per pound in GHS" class="!text-[16px]" />
+              </div>
             </div>
-            <div id="calc-output-usd" class="font-mono-num text-2xl font-bold text-[#141917]">
-              $7,906.00
+
+            <!-- Low Karat Warning -->
+            <div id="est-low-karat-warn" class="hidden px-3 py-2 rounded-xl bg-amber-50 border border-amber-200 text-[11.5px] font-semibold text-amber-800">
+              ⚠ Low karat reading (&lt; 14 kt). Confirm sample density before trading.
+            </div>
+
+            <!-- 4-Metric Breakdown Grid (Pounds, Density, Payable Karat, Purity %) -->
+            <div class="grid grid-cols-2 gap-2.5 pt-1">
+              <div class="p-2.5 rounded-xl bg-[#FAF8F4] border border-[#141917]/8">
+                <div class="text-[10px] font-semibold uppercase tracking-wider text-[#848E88]">Pounds (÷7.75)</div>
+                <div id="est-res-pounds" class="font-mono-num text-sm font-bold text-[#141917] mt-0.5">4.00</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-[#FAF8F4] border border-[#141917]/8">
+                <div class="text-[10px] font-semibold uppercase tracking-wider text-[#848E88]">Density</div>
+                <div id="est-res-density" class="font-mono-num text-sm font-bold text-[#141917] mt-0.5">18.45</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-[#FAF8F4] border border-[#141917]/8">
+                <div class="text-[10px] font-semibold uppercase tracking-wider text-[#848E88]">Karat Used</div>
+                <div id="est-res-karat" class="font-mono-num text-sm font-bold text-[#141917] mt-0.5">22.58 kt</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-[#FAF8F4] border border-[#141917]/8">
+                <div class="text-[10px] font-semibold uppercase tracking-wider text-[#848E88]">Purity</div>
+                <div id="est-res-purity" class="font-mono-num text-sm font-bold text-[#0E7C5B] mt-0.5">94.09%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GOLD BALLS INPUTS (Weight in Grams, Price per Blade GHS) -->
+          <div id="est-inputs-balls" class="space-y-3 hidden">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label for="est-balls-weight" class="text-[11.5px] font-bold text-[#525B56]">Gold Weight</label>
+                <div class="weight-input-box !mt-1 !py-2 !px-3">
+                  <input id="est-balls-weight" type="number" step="any" min="0" value="8.00" aria-label="Gold balls weight in grams" class="!text-[16px]" />
+                  <span class="text-[10.5px] font-bold text-[#848E88]">g</span>
+                </div>
+              </div>
+              <div>
+                <label for="est-price-blade" class="text-[11.5px] font-bold text-[#525B56]">Price / Blade</label>
+                <div class="weight-input-box !mt-1 !py-2 !px-3">
+                  <span class="text-[11px] font-bold text-[#8C6119] mr-1.5">GHS</span>
+                  <input id="est-price-blade" type="number" step="any" min="0" value="1100" aria-label="Price per blade in GHS" class="!text-[16px]" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Blades Breakdown Grid (0.8g per blade, 8g per pound, 0.08g per match) -->
+            <div class="grid grid-cols-2 gap-2.5 pt-1">
+              <div class="p-2.5 rounded-xl bg-[#FAF8F4] border border-[#141917]/8">
+                <div class="text-[10px] font-semibold uppercase tracking-wider text-[#848E88]">Total Blades (÷0.8g)</div>
+                <div id="est-res-blades" class="font-mono-num text-sm font-bold text-[#141917] mt-0.5">10.0000</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-[#FAF8F4] border border-[#141917]/8">
+                <div class="text-[10px] font-semibold uppercase tracking-wider text-[#848E88]">Breakdown</div>
+                <div id="est-res-balls-breakdown" class="font-mono-num text-xs font-bold text-[#0E7C5B] mt-1">1 lb · 0 bld · 0 mtch</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TOTAL ESTIMATED PAYOUT IN GHS -->
+          <div class="mt-4 pt-4 border-t border-[#141917]/10">
+            <div class="flex items-end justify-between gap-2">
+              <div>
+                <div class="text-[10.5px] font-bold uppercase tracking-wider text-[#848E88]">Estimated Payout (GHS)</div>
+                <div id="est-sub-meta" class="font-mono-num text-[11px] text-[#525B56] mt-0.5">Adj. Price/lb: GHS 0.00</div>
+              </div>
+              <div id="calc-output-ghs" class="font-mono-num text-2xl font-bold text-[#141917] text-right">
+                GHS 0.00
+              </div>
             </div>
           </div>
 
           <button onclick="sendEstimatorToWhatsApp()" class="btn-ink-primary w-full mt-4 !py-3.5 !text-xs">
-            Lock Indicative Rate on WhatsApp →
+            Send Estimate to WhatsApp Desk →
           </button>
         </div>
       </section>
