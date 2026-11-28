@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FAF8F4" />
+
+  <!-- Primary & Social Link Preview Meta Tags -->
+  <title>Machine MVP Online Store — Mukhlis Farhan Mining Supply</title>
+  <meta name="title" content="Machine MVP Online Store — Mukhlis Farhan Mining Supply" />
+  <meta name="description"
+    content="Browse live mining machinery, Changfa diesel engines, vertical sand pumps, DreamTurf gold carpets, suction hoses, and spare parts with real-time stock &amp; GHS prices from Mukhlis Farhan's shop in Odumase-Konongo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Machine MVP Online Store | Mukhlis Farhan Mining Equipment" />
+  <meta property="og:description"
+    content="Live stock &amp; GHS prices for mining materials, pumps, diesel engines, carpets, and tools. Build your order list and checkout directly on WhatsApp." />
+  <meta property="og:image" content="https://mukhlisfarhantrading.com/assets/img/products/changfa-diesel-engine.jpg" />
+  <link rel="icon" type="image/jpeg" href="assets/media/mukhlis.jpeg" />
+
+  <!-- Fonts matching Portfolio Editorial Design -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/store.css" />
+</head>
+<body>
+
+  <div class="stage-wrap">
+    <main class="mobile-canvas">
+
+      <!-- 1. STICKY STORE HEADER & SEARCH -->
+      <div class="store-header-sticky">
+        <nav class="flex items-center justify-between px-6 pt-5 pb-3">
+          <a href="index.html" class="icon-pill-btn !py-1.5 !px-3" aria-label="Back to Mukhlis Farhan Portfolio">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>Card</span>
+          </a>
+
+          <div class="text-center">
+            <div class="eyebrow !text-[9.5px] leading-none">Online Store</div>
+            <div id="store-brand-name" class="font-editorial text-[17px] font-semibold text-[#141917] leading-tight mt-0.5">
+              Machine MVP Shop
+            </div>
+          </div>
+
+          <button onclick="openSheet('cart-sheet')" class="icon-pill-btn !py-1.5 !px-3 relative" aria-label="Open Order Bag">
+            <svg class="w-4 h-4 text-[#B4832C]" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+            <span id="nav-cart-count" class="font-mono-num text-xs font-bold">0</span>
+          </button>
+        </nav>
+
+        <!-- Search Box -->
+        <div class="px-6 pb-3">
+          <div class="store-search-wrap">
+            <svg class="w-4 h-4 text-[#848E88] shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input id="store-search-input" type="search" placeholder="Search pumps, engines, carpets, hoses, SKU..." autocomplete="off" />
+            <button id="store-search-clear" onclick="clearSearch()" class="hidden text-xs font-bold text-[#848E88] hover:text-[#141917] bg-transparent border-none cursor-pointer">
+              ✕
+            </button>
+          </div>
+        </div>
+
+        <!-- Category Filter Pills (Populated Live from API) -->
+        <div id="category-strip" class="category-strip">
+          <button class="cat-pill active">All Items</button>
+        </div>
+      </div>
+
+      <!-- 2. COMPACT STORE HERO & LIVE SYNC STATUS BANNER -->
+      <section class="px-6 pt-5 pb-2">
+        <div class="p-4 rounded-[22px] bg-[#16221E] text-white relative overflow-hidden">
+          <div class="venture-visual-pattern"></div>
+          <div class="relative z-10 flex items-center justify-between gap-3">
+            <div>
+              <div class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-emerald-200">
+                <span id="sync-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span id="sync-status-text">Syncing Live Shop Inventory...</span>
+              </div>
+              <h1 class="font-editorial text-[21px] font-semibold leading-snug mt-1">
+                Mining Materials &amp; Machinery
+              </h1>
+              <p id="store-location-text" class="text-[11.5px] text-emerald-100/80 mt-0.5">
+                Odumase-Konongo, Ghana • Live Stock &amp; GHS Pricing
+              </p>
+            </div>
+            <button onclick="refreshCatalog()" title="Refresh Live Stock" class="shrink-0 w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center border-none cursor-pointer transition">
+              <svg id="refresh-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Live Stats Strip -->
+          <div class="relative z-10 grid grid-cols-3 gap-2 mt-3.5 pt-3 border-t border-white/15 text-center">
+            <div>
+              <div id="stat-total-items" class="font-mono-num text-sm font-bold text-white">--</div>
+              <div class="text-[10px] text-emerald-100/75">Catalog Items</div>
+            </div>
+            <div>
+              <div id="stat-instock-items" class="font-mono-num text-sm font-bold text-emerald-300">--</div>
+              <div class="text-[10px] text-emerald-100/75">In Stock Now</div>
+            </div>
+            <div>
+              <div class="font-mono-num text-sm font-bold text-amber-300">GHS</div>
+              <div class="text-[10px] text-emerald-100/75">Shop Pricing</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. FILTER TOOLBAR (IN-STOCK ONLY + SORT) -->
+      <div class="store-toolbar">
+        <button id="toggle-instock-btn" onclick="toggleInStockOnly()" class="stock-toggle-btn">
+          <span class="w-2 h-2 rounded-full bg-[#0E7C5B]"></span>
+          In Stock Only
+        </button>
+
+        <div class="flex items-center gap-2">
+          <span id="results-count-label" class="text-[11px] font-semibold text-[#848E88]">Loading...</span>
+          <select id="store-sort-select" onchange="changeSort(this.value)" class="store-sort-select" aria-label="Sort products">
+            <option value="newest">Featured</option>
+            <option value="name">Name (A–Z)</option>
+            <option value="price_asc">Price: Low → High</option>
+            <option value="price_desc">Price: High → Low</option>
+            <option value="stock">Most Stock</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 4. API OFFLINE NOTICE (Hidden when live API succeeds) -->
+      <div id="offline-banner" class="hidden mx-6 my-2 p-3 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-center justify-between gap-2">
+        <span>Showing featured shop items. Live POS sync is currently offline.</span>
+        <button onclick="refreshCatalog()" class="font-bold underline bg-transparent border-none text-amber-900 cursor-pointer shrink-0">Retry</button>
+      </div>
+
+      <!-- 5. PRODUCT CATALOG GRID (Populated from machine_mvp API) -->
+      <section id="catalog-grid" class="catalog-grid" aria-live="polite"></section>
+
+      <!-- EMPTY STATE -->
+      <div id="empty-state" class="hidden px-6 py-12 text-center">
+        <div class="w-12 h-12 rounded-2xl bg-[#F3EFE6] text-[#B4832C] flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <h3 class="font-editorial text-lg font-semibold text-[#141917]">No matching equipment found</h3>
+        <p class="text-xs text-[#525B56] mt-1">Try another search keyword or view all categories.</p>
+        <button onclick="resetFilters()" class="btn-ink-primary mt-4 !py-2.5 !px-5 !text-xs">Show All Items</button>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ========================================================================
+       FLOATING ORDER BAG BAR (Appears when customer adds 1+ items)
+       ======================================================================== -->
+  <div id="floating-cart-bar" class="floating-cart-bar-wrap hidden-bar">
+    <div class="floating-cart-bar" onclick="openSheet('cart-sheet')">
+      <div class="flex items-center gap-3">
+        <div id="bar-cart-count" class="cart-qty-pill">0</div>
+        <div>
+          <div class="text-[11px] text-amber-200/80 font-semibold leading-none">Order Bag</div>
+          <div id="bar-cart-total" class="font-mono-num text-sm font-bold text-white mt-0.5">GHS 0.00</div>
+        </div>
+      </div>
+      <div class="text-xs font-bold text-[#FAF8F4] bg-white/15 px-3.5 py-2 rounded-xl flex items-center gap-1.5">
+        <span>Checkout</span>
+        <span>→</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       BOTTOM SHEET 1: PRODUCT DETAIL VIEW
+       ======================================================================== -->
+  <div id="detail-sheet" class="sheet-backdrop" onclick="if(event.target === this) closeSheet('detail-sheet')">
+    <div class="sheet-panel !p-5 max-h-[88vh] overflow-y-auto">
+      <div class="w-10 h-1 bg-[#141917]/15 rounded-full mx-auto mb-4"></div>
+
+      <div id="detail-media-box" class="w-full h-56 rounded-2xl overflow-hidden bg-[#F3EFE6] mb-4 relative"></div>
+
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <span id="detail-category" class="eyebrow"></span>
+          <h3 id="detail-name" class="font-editorial text-2xl font-semibold text-[#141917] leading-tight mt-1"></h3>
+          <p id="detail-sku" class="font-mono-num text-[11px] text-[#848E88] mt-1"></p>
+        </div>
+        <div class="text-right shrink-0">
+          <div id="detail-price" class="font-mono-num text-xl font-bold text-[#141917]"></div>
+          <div id="detail-unit" class="text-[11px] text-[#848E88]"></div>
+        </div>
+      </div>
+
+      <!-- Stock & Status Pill Row -->
+      <div class="flex items-center gap-2 mt-3">
+        <span id="detail-stock-pill" class="text-xs font-bold px-3 py-1 rounded-full"></span>
+        <span id="detail-type-pill" class="hidden text-xs font-bold px-3 py-1 rounded-full bg-[#FBF4E4] text-[#8C6119]"></span>
+      </div>
+
+      <!-- Bundle Components (shown automatically if item is a bundle in machine_mvp) -->
+      <div id="detail-bundle-box" class="hidden mt-4 p-3.5 rounded-2xl bg-[#FAF8F4] border border-[#141917]/8">
+        <div class="text-[11px] font-bold uppercase tracking-wider text-[#8C6119] mb-2">Included in This Bundle</div>
+        <ul id="detail-bundle-list" class="space-y-1.5 text-xs text-[#454E49]"></ul>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2.5 mt-5">
+        <button id="detail-add-btn" class="btn-ink-primary !py-3 !text-xs">
+          + Add to Order Bag
+        </button>
+        <button id="detail-whatsapp-btn" class="btn-gold-outline !py-3 !text-xs">
+          Order via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       BOTTOM SHEET 2: ORDER BAG & WHATSAPP CHECKOUT
+       ======================================================================== -->
+  <div id="cart-sheet" class="sheet-backdrop" onclick="if(event.target === this) closeSheet('cart-sheet')">
+    <div class="sheet-panel !p-5 max-h-[88vh] flex flex-col">
+      <div class="w-10 h-1 bg-[#141917]/15 rounded-full mx-auto mb-3 shrink-0"></div>
+
+      <div class="flex items-center justify-between mb-3 shrink-0">
+        <div>
+          <p class="eyebrow">Direct Shop Order</p>
+          <h3 class="font-editorial text-2xl font-semibold text-[#141917] leading-tight">Your Order Bag</h3>
+        </div>
+        <button onclick="clearCart()" class="text-xs font-bold text-[#848E88] hover:text-red-600 bg-transparent border-none cursor-pointer">
+          Clear All
+        </button>
+      </div>
+
+      <!-- Cart Items List -->
+      <div id="cart-items-list" class="space-y-2.5 overflow-y-auto flex-1 pr-1 max-h-[36vh]"></div>
+
+      <!-- Optional Customer Name & Delivery/Pickup Note -->
+      <div id="cart-checkout-form" class="mt-4 pt-3.5 border-t border-[#141917]/10 space-y-2.5 shrink-0">
+        <div class="grid grid-cols-2 gap-2">
+          <input id="checkout-name" type="text" placeholder="Your Name (optional)" class="w-full px-3 py-2.5 rounded-xl bg-[#FAF8F4] border border-[#141917]/12 text-xs font-medium text-[#141917] outline-none focus:border-[#B4832C]" />
+          <input id="checkout-location" type="text" placeholder="Site / Pickup Town" class="w-full px-3 py-2.5 rounded-xl bg-[#FAF8F4] border border-[#141917]/12 text-xs font-medium text-[#141917] outline-none focus:border-[#B4832C]" />
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#525B56]">Estimated Total</span>
+          <span id="cart-total-amount" class="font-mono-num text-xl font-bold text-[#141917]">GHS 0.00</span>
+        </div>
+
+        <button onclick="checkoutOrderViaWhatsApp()" class="btn-ink-primary w-full !py-3.5 !text-xs">
+          Send Complete Order on WhatsApp →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 z-70 px-5 py-2.5 rounded-full bg-[#141917] text-[#FAF8F4] text-xs font-semibold shadow-xl transition-all duration-300 opacity-0 pointer-events-none translate-y-3">
+    <span id="toast-msg">Added to bag!</span>
+  </div>
+
+  <script src="assets/js/store.js"></script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+/* ==========================================================================
+   MUKHLIS FARHAN — MACHINE MVP ONLINE STORE STYLES
+   Inherits Editorial Alabaster, Burnished Gold & Forest-Slate Design System
+   Mobile-First Portrait Storefront (440px centered on desktop, full-bleed mobile)
+   ========================================================================== */
+
+.store-header-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 35;
+  background: rgba(250, 248, 244, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* Search Input Bar */
+.store-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface-pure);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 14px -6px rgba(20, 25, 23, 0.06);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.store-search-wrap:focus-within {
+  border-color: var(--gold-rich);
+  box-shadow: 0 0 0 3px rgba(180, 131, 44, 0.12);
+}
+
+.store-search-wrap input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink-primary);
+  outline: none;
+}
+
+.store-search-wrap input::placeholder {
+  color: var(--ink-muted);
+}
+
+/* Category Horizontal Scroller */
+.category-strip {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 24px 14px;
+  scrollbar-width: none;
+}
+
+.category-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.cat-pill {
+  flex: 0 0 auto;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
+  background: var(--surface-pure);
+  color: var(--ink-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cat-pill:hover {
+  border-color: var(--gold-border);
+  color: var(--ink-primary);
+}
+
+.cat-pill.active {
+  background: var(--surface-ink);
+  color: #FAF8F4;
+  border-color: var(--surface-ink);
+}
+
+.cat-pill .cat-count {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  opacity: 0.72;
+}
+
+/* Filter Toolbar (In-Stock Switch + Sort Select) */
+.store-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 24px 8px;
+}
+
+.stock-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
+  background: var(--surface-pure);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.stock-toggle-btn.active {
+  background: var(--emerald-bg);
+  border-color: rgba(14, 124, 91, 0.35);
+  color: var(--emerald);
+}
+
+.store-sort-select {
+  background: var(--surface-pure);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink-primary);
+  outline: none;
+  cursor: pointer;
+}
+
+/* Store Product Grid */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  padding: 10px 24px 120px;
+}
+
+.product-card {
+  background: var(--surface-pure);
+  border-radius: 20px;
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold-border);
+  box-shadow: var(--shadow-card);
+}
+
+.product-card.out-of-stock {
+  opacity: 0.78;
+}
+
+.product-media {
+  position: relative;
+  width: 100%;
+  height: 126px;
+  background: linear-gradient(145deg, #F3EFE6 0%, #EAE3D5 100%);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.product-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--gold-deep);
+  background: radial-gradient(circle at 30% 25%, #FBF4E4 0%, #EFE7D6 100%);
+  padding: 12px;
+  text-align: center;
+}
+
+/* Stock Status Badges */
+.stock-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.stock-badge.in-stock {
+  background: rgba(14, 124, 91, 0.9);
+  color: #FFFFFF;
+}
+
+.stock-badge.low-stock {
+  background: rgba(180, 131, 44, 0.94);
+  color: #FFFFFF;
+}
+
+.stock-badge.out-stock {
+  background: rgba(20, 25, 23, 0.8);
+  color: #FAF8F4;
+}
+
+.bundle-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: rgba(20, 25, 23, 0.84);
+  color: #FBF4E4;
+}
+
+/* Add to Cart Mini Button */
+.add-bag-btn {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(20, 25, 23, 0.14);
+  background: var(--surface-paper);
+  color: var(--ink-primary);
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.add-bag-btn:hover:not(:disabled) {
+  background: var(--surface-ink);
+  color: #FAF8F4;
+  border-color: var(--surface-ink);
+}
+
+.add-bag-btn.in-bag {
+  background: var(--emerald-bg);
+  color: var(--emerald);
+  border-color: rgba(14, 124, 91, 0.32);
+}
+
+.add-bag-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Floating Order Bag Bar (Pinned at bottom of Mobile Canvas) */
+.floating-cart-bar-wrap {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 404px;
+  z-index: 45;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+}
+
+.floating-cart-bar-wrap.hidden-bar {
+  transform: translate(-50%, 100px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.floating-cart-bar {
+  background: var(--surface-ink);
+  color: #FAF8F4;
+  border-radius: 20px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 18px 40px -10px rgba(20, 25, 23, 0.48);
+  cursor: pointer;
+  border: 1px solid rgba(214, 167, 79, 0.35);
+}
+
+.cart-qty-pill {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  background: var(--gold-bright);
+  color: var(--surface-ink);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cart Quantity Controls inside Drawer */
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface-paper);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 3px 6px;
+}
+
+.qty-step-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  border: none;
+  background: var(--surface-pure);
+  color: var(--ink-primary);
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qty-step-btn:hover {
+  background: var(--gold-soft);
+  color: var(--gold-deep);
+}
+
+/* Loading Skeleton Cards */
+@keyframes shimmerBg {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-box {
+  background: linear-gradient(90deg, #EFECE5 25%, #F7F5F0 50%, #EFECE5 75%);
+  background-size: 200% 100%;
+  animation: shimmerBg 1.3s infinite linear;
+  border-radius: 10px;
+}
